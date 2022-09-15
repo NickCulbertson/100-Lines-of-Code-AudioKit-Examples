@@ -9,26 +9,26 @@ class DrumClass: ObservableObject {
     let names = ["KICK","CLOSED HI-HAT","SNARE","OPEN HI-HAT","RIM SHOT","CRASH","TOM I","TOM II","PAD I","PAD II","PAD III","PAD IV","PAD V","PAD VI","PAD VII","PAD VIII"]
     init() {
         engine.output = instrument
-        loadInstrument()
+        try? instrument.loadInstrument(url: Bundle.main.url(forResource: "Sounds/GuitarTaps", withExtension: "exs")!)
         try? engine.start()
-    }
-    func loadInstrument() {
-            try? instrument.loadInstrument(url: Bundle.main.url(forResource: "Sounds/GuitarTaps", withExtension: "exs")!)
     }
 }
 struct DrumView: Identifiable, View {
     @EnvironmentObject var conductor: DrumClass
+    @GestureState private var isPressed = false
     var id: Int
     var body: some View {
         RoundedRectangle(cornerRadius: 20.0).fill(conductor.playing[id] ? Color.blue : Color.blue.opacity(0.5)).aspectRatio(contentMode: .fit)
-            .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local).onChanged { _ in
-                    if !conductor.playing[id] {
+            .gesture(DragGesture(minimumDistance: 0).updating($isPressed) { (value, gestureState, transaction) in
+                    gestureState = true
+                }).onChange(of: isPressed, perform: { (pressed) in
+                    if pressed {
                         conductor.playing[id] = true
                         conductor.instrument.play(noteNumber: MIDINoteNumber(conductor.notes[id]), velocity: 90, channel: 0)
+                    } else {
+                        conductor.playing[id] = false
+                        conductor.instrument.stop(noteNumber: MIDINoteNumber(conductor.notes[id]), channel: 0)
                     }
-                }.onEnded { _ in
-                    conductor.playing[id] = false
-                    conductor.instrument.stop(noteNumber: MIDINoteNumber(conductor.notes[id]), channel: 0)
                 }).overlay (
                 Text(conductor.names[id]).allowsHitTesting(false)
             )
@@ -39,8 +39,8 @@ struct DrumPads: View {
     @StateObject var conductor = DrumClass()
     func reloadAudio() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            if(!conductor.engine.avEngine.isRunning) {
-                conductor.loadInstrument()
+            if !conductor.engine.avEngine.isRunning {
+                try? conductor.instrument.loadInstrument(url: Bundle.main.url(forResource: "Sounds/GuitarTaps", withExtension: "exs")!)
                 try? conductor.engine.start()
             }
         }
@@ -59,8 +59,8 @@ struct DrumPads: View {
             }.padding(10)
         }.onChange(of: scenePhase) { newPhase in
             if newPhase == .active {
-                if(!conductor.engine.avEngine.isRunning) {
-                    conductor.loadInstrument()
+                if !conductor.engine.avEngine.isRunning {
+                    try? conductor.instrument.loadInstrument(url: Bundle.main.url(forResource: "Sounds/GuitarTaps", withExtension: "exs")!)
                     try? conductor.engine.start()
                 }
             } else if newPhase == .background {
@@ -83,8 +83,7 @@ struct DrumPads: View {
             }
             if type == .began {
                 self.conductor.engine.stop()
-            }
-            else if type == .ended {
+            } else if type == .ended {
                 guard let optionsValue =
                         info[AVAudioSessionInterruptionOptionKey] as? UInt else {
                     return
