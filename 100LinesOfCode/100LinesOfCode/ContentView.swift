@@ -17,7 +17,7 @@ struct MasterView: View {
             Section(header: Text("Demos")) {
                 Group {
                 NavigationLink("1. Drum Pads", destination: DrumPads())
-                NavigationLink("2. ?", destination: ComingSoon())
+                NavigationLink("2. Sequencer", destination: Sequencer())
                 NavigationLink("3. ?", destination: ComingSoon())
                 NavigationLink("4. ?", destination: ComingSoon())
                 NavigationLink("5. ?", destination: ComingSoon())

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A39A94528D4992700EECFEF /* Sequencer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A39A94428D4992700EECFEF /* Sequencer.swift */; };
 		5ABCFC8128D36122000A4B14 /* 100LinesOfCodeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABCFC8028D36122000A4B14 /* 100LinesOfCodeApp.swift */; };
 		5ABCFC8528D36123000A4B14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5ABCFC8428D36123000A4B14 /* Assets.xcassets */; };
 		5ABCFC8828D36123000A4B14 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5ABCFC8728D36123000A4B14 /* Preview Assets.xcassets */; };
@@ -38,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5A39A94428D4992700EECFEF /* Sequencer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequencer.swift; sourceTree = "<group>"; };
+		5A39A94628D4B25000EECFEF /* -00LinesOfCode-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "-00LinesOfCode-Info.plist"; sourceTree = SOURCE_ROOT; };
 		5ABCFC7D28D36122000A4B14 /* 100LinesOfCode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 100LinesOfCode.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5ABCFC8028D36122000A4B14 /* 100LinesOfCodeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 100LinesOfCodeApp.swift; sourceTree = "<group>"; };
 		5ABCFC8428D36123000A4B14 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -103,8 +106,10 @@
 		5ABCFC7F28D36122000A4B14 /* 100LinesOfCode */ = {
 			isa = PBXGroup;
 			children = (
+				5A39A94628D4B25000EECFEF /* -00LinesOfCode-Info.plist */,
 				5ABCFC8028D36122000A4B14 /* 100LinesOfCodeApp.swift */,
 				5ABCFCB128D3624B000A4B14 /* ContentView.swift */,
+				5A39A94428D4992700EECFEF /* Sequencer.swift */,
 				5ABCFCAF28D361E2000A4B14 /* DrumPads.swift */,
 				5ABCFCB328D365C5000A4B14 /* ComingSoon.swift */,
 				5ABCFC8428D36123000A4B14 /* Assets.xcassets */,
@@ -277,6 +282,7 @@
 			files = (
 				5ABCFCB028D361E2000A4B14 /* DrumPads.swift in Sources */,
 				5ABCFC8128D36122000A4B14 /* 100LinesOfCodeApp.swift in Sources */,
+				5A39A94528D4992700EECFEF /* Sequencer.swift in Sources */,
 				5ABCFCB228D3624B000A4B14 /* ContentView.swift in Sources */,
 				5ABCFCB428D365C5000A4B14 /* ComingSoon.swift in Sources */,
 			);
@@ -440,6 +446,7 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "-00LinesOfCode-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -470,6 +477,7 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "-00LinesOfCode-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

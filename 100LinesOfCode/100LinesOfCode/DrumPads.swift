@@ -18,7 +18,7 @@ struct DrumView: Identifiable, View {
     @GestureState private var isPressed = false
     var id: Int
     var body: some View {
-        RoundedRectangle(cornerRadius: 20.0).fill(conductor.playing[id] ? Color.blue : Color.blue.opacity(0.5)).aspectRatio(contentMode: .fit)
+        RoundedRectangle(cornerRadius: 20.0).fill(conductor.playing[id] ? Color.blue : Color.blue.opacity(0.2)).aspectRatio(contentMode: .fit)
             .gesture(DragGesture(minimumDistance: 0).updating($isPressed) { (value, gestureState, transaction) in
                     gestureState = true
                 }).onChange(of: isPressed, perform: { (pressed) in
