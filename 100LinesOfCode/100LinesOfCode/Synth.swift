@@ -14,10 +14,9 @@ class SynthClass: ObservableObject {
     @Published var octave = 1
     let filter : MoogLadder
     @Published var env : AmplitudeEnvelope
+    var notes = Array(repeating: 0, count: 11)
     @Published var cutoff = AUValue(20_000) {
-        didSet {
-            filter.cutoffFrequency = AUValue(cutoff)
-        }
+        didSet { filter.cutoffFrequency = AUValue(cutoff) }
     }
     var osc = [MorphingOscillator(index:0.75,detuningOffset: -0.5), MorphingOscillator(index:0.75,detuningOffset: 0.5), MorphingOscillator(index:2.75)]
     init() {
@@ -41,42 +40,47 @@ class SynthClass: ObservableObject {
         env.closeGate()
         data.frequency = AUValue(pitch.midiNoteNumber).midiNoteToFrequency()
         data.octaveFrequency = AUValue(pitch.midiNoteNumber-12).midiNoteToFrequency()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) { self.env.openGate() }
+        for num in 0 ... 10 {
+            if notes[num] == 0 {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) { self.env.openGate() }
+                notes[num] = pitch.intValue
+                break
+            }
+        }
     }
     func noteOff(pitch: Pitch) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) { self.env.closeGate() }
+        for num in 0 ... 10 { //closeGate if all fingers are off
+            if notes[num] == pitch.intValue { notes[num] = 0 }
+            if Set(notes).count <= 1 {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) { self.env.closeGate() }
+            }
+        }
     }
 }
 struct SynthView: View {
     @StateObject var conductor = SynthClass()
     var body: some View {
-        ZStack {
-            RadialGradient(gradient: Gradient(colors: [.pink.opacity(0.5), .black]), center: .center, startRadius: 2, endRadius: 650).edgesIgnoringSafeArea(.all)
+        ZStack { RadialGradient(gradient: Gradient(colors: [.pink.opacity(0.5), .black]), center: .center, startRadius: 2, endRadius: 650).edgesIgnoringSafeArea(.all)
             VStack {
                 HStack {
                     VStack {
-                        Text("Filter").padding(.top, 10)
-                        Text("\(Int(conductor.cutoff))")
+                        Text("Filter\n\(Int(conductor.cutoff))").multilineTextAlignment(.center).padding(.top, 10)
                         SmallKnob(value: $conductor.cutoff, range: 12.0 ... 20_000.0).frame(maxWidth:150).padding(.bottom, 10)
                     }
                     VStack {
-                        Text("Attack").padding(.top, 10)
-                        Text(String(format: "%.2f", conductor.env.attackDuration))
+                        Text("Attack\n\(String(format: "%.2f", conductor.env.attackDuration))").multilineTextAlignment(.center).padding(.top, 10)
                         SmallKnob(value: $conductor.env.attackDuration, range: 0.0 ... 10.0).frame(maxWidth:150).padding(.bottom, 10)
                     }
                     VStack {
-                        Text("Decay").padding(.top, 10)
-                        Text(String(format: "%.2f", conductor.env.decayDuration))
+                        Text("Decay\n\(String(format: "%.2f", conductor.env.decayDuration))").multilineTextAlignment(.center).padding(.top, 10)
                         SmallKnob(value: $conductor.env.decayDuration, range: 0.0 ... 10.0).frame(maxWidth:150).padding(.bottom, 10)
                     }
                     VStack {
-                        Text("Sustain").padding(.top, 10)
-                        Text(String(format: "%.2f", conductor.env.sustainLevel))
+                        Text("Sustain\n\(String(format: "%.2f", conductor.env.sustainLevel))").multilineTextAlignment(.center).padding(.top, 10)
                         SmallKnob(value: $conductor.env.sustainLevel, range: 0.0 ... 1.0).frame(maxWidth:150).padding(.bottom, 10)
                     }
                     VStack {
-                        Text("Release").padding(.top, 10)
-                        Text(String(format: "%.2f", conductor.env.releaseDuration))
+                        Text("Release\n\(String(format: "%.2f", conductor.env.releaseDuration))").multilineTextAlignment(.center).padding(.top, 10)
                         SmallKnob(value: $conductor.env.releaseDuration, range: 0.0 ... 10.0).frame(maxWidth:150).padding(.bottom, 10)
                     }
                 }.padding(10)
@@ -91,8 +95,6 @@ struct SynthView: View {
                 }.frame(maxWidth: 400).padding(10)
                 SwiftUIKeyboard(firstOctave: conductor.octave, octaveCount: 2, noteOn: conductor.noteOn(pitch:point:), noteOff: conductor.noteOff).frame(maxHeight: 600)
             }
-        }.onDisappear() {
-            self.conductor.engine.stop()
-        }
+        }.onDisappear() { self.conductor.engine.stop() }
     }
 }
