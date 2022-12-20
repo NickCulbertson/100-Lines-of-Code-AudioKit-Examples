@@ -8,9 +8,7 @@ class DunneSamplerClass: ObservableObject {
     var instrument = Sampler()
     init() {
         engine.output = instrument
-        if let fileURL = Bundle.main.url(forResource: "Sounds/sqr", withExtension: "SFZ") {
-            instrument.loadSFZ(url: fileURL)
-        }
+        instrument.loadSFZ(url: Bundle.main.url(forResource: "Sounds/sqr", withExtension: "SFZ")!)
         instrument.masterVolume = 0.15
         try? engine.start()
     }
@@ -30,6 +28,8 @@ struct DunneSamplerView: View {
                 Spacer()
                 SwiftUIKeyboard(firstOctave: 2, octaveCount: 2, noteOn: conductor.noteOn(pitch:point:), noteOff: conductor.noteOff).frame(maxHeight: 600)
             }
+        }.onDisappear() {
+            self.conductor.engine.stop()
         }
     }
 }

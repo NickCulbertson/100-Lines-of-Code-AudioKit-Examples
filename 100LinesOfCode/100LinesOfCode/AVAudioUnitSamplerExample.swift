@@ -27,6 +27,8 @@ struct AVAudioUnitSamplerView: View {
                 Spacer()
                 SwiftUIKeyboard(firstOctave: 2, octaveCount: 2, noteOn: conductor.noteOn(pitch:point:), noteOff: conductor.noteOff).frame(maxHeight: 600)
             }
+        }.onDisappear() {
+            self.conductor.engine.stop()
         }
     }
 }
