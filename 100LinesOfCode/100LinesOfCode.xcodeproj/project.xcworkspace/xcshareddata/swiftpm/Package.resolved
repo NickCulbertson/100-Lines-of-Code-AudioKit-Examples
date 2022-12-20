@@ -28,6 +28,15 @@
       }
     },
     {
+      "identity" : "dunneaudiokit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AudioKit/DunneAudioKit",
+      "state" : {
+        "revision" : "ee8fe2523175da480f17e230778a8b0328096be4",
+        "version" : "5.5.1"
+      }
+    },
+    {
       "identity" : "keyboard",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/AudioKit/Keyboard",
