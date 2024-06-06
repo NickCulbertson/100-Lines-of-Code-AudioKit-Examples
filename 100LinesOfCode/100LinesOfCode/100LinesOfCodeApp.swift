@@ -10,7 +10,7 @@ struct _00LinesOfCodeApp: App {
             Settings.bufferLength = .medium
             try AVAudioSession.sharedInstance().setPreferredIOBufferDuration(Settings.bufferLength.duration)
             try AVAudioSession.sharedInstance().setCategory(.playback,
-                                                            options: [.mixWithOthers, .allowBluetooth, .allowBluetoothA2DP])
+                                                            options: [.mixWithOthers])
             try AVAudioSession.sharedInstance().setActive(true)
         } catch let err {
             print(err)
