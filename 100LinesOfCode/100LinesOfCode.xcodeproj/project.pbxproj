@@ -11,7 +11,6 @@
 		5A123EDB2952221400AF6DE8 /* AVAudioUnitSamplerExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A123ED92952221400AF6DE8 /* AVAudioUnitSamplerExample.swift */; };
 		5A123EDC2952221400AF6DE8 /* DunneSamplerExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A123EDA2952221400AF6DE8 /* DunneSamplerExample.swift */; };
 		5A123EDF2952231000AF6DE8 /* DunneAudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5A123EDE2952231000AF6DE8 /* DunneAudioKit */; };
-		5A36B1742ACF0E3200D652F6 /* MiniOsc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A36B1732ACF0E3200D652F6 /* MiniOsc.swift */; };
 		5A39A94528D4992700EECFEF /* Sequencer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A39A94428D4992700EECFEF /* Sequencer.swift */; };
 		5A4F503A2D95784C00442782 /* AudioKitEX in Frameworks */ = {isa = PBXBuildFile; productRef = 5A4F50392D95784C00442782 /* AudioKitEX */; };
 		5A86B75828D9F8E200C20F79 /* Synth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A86B75728D9F8E200C20F79 /* Synth.swift */; };
@@ -55,7 +54,6 @@
 		5A123ED329521A5800AF6DE8 /* AppleSamplerExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSamplerExample.swift; sourceTree = "<group>"; };
 		5A123ED92952221400AF6DE8 /* AVAudioUnitSamplerExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVAudioUnitSamplerExample.swift; sourceTree = "<group>"; };
 		5A123EDA2952221400AF6DE8 /* DunneSamplerExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DunneSamplerExample.swift; sourceTree = "<group>"; };
-		5A36B1732ACF0E3200D652F6 /* MiniOsc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniOsc.swift; sourceTree = "<group>"; };
 		5A39A94428D4992700EECFEF /* Sequencer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequencer.swift; sourceTree = "<group>"; };
 		5A39A94628D4B25000EECFEF /* -00LinesOfCode-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "-00LinesOfCode-Info.plist"; sourceTree = SOURCE_ROOT; };
 		5A86B75728D9F8E200C20F79 /* Synth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Synth.swift; sourceTree = "<group>"; };
@@ -138,7 +136,6 @@
 				5ABCFCB128D3624B000A4B14 /* ContentView.swift */,
 				5A39A94428D4992700EECFEF /* Sequencer.swift */,
 				5ABCFCAF28D361E2000A4B14 /* DrumPads.swift */,
-				5A36B1732ACF0E3200D652F6 /* MiniOsc.swift */,
 				5A86B75728D9F8E200C20F79 /* Synth.swift */,
 				5AB98BD9291C3BE200BD70F6 /* SynthPunkConsole.swift */,
 				5ABCFCB328D365C5000A4B14 /* ComingSoon.swift */,
@@ -335,7 +332,6 @@
 				5A123EDC2952221400AF6DE8 /* DunneSamplerExample.swift in Sources */,
 				5A123EDB2952221400AF6DE8 /* AVAudioUnitSamplerExample.swift in Sources */,
 				5ABCFCB428D365C5000A4B14 /* ComingSoon.swift in Sources */,
-				5A36B1742ACF0E3200D652F6 /* MiniOsc.swift in Sources */,
 				5AE85C1328DA084E00CCCC08 /* SwiftUIKeyboard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
